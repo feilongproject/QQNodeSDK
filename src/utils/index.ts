@@ -1,6 +1,5 @@
 import fetch from "node-fetch";
 import { GetWsParam } from "../types";
-import { version } from "../../package.json";
 
 
 export function delayTime(ms: number) {
@@ -12,7 +11,7 @@ export function delayTime(ms: number) {
 export function buildFetch(config: GetWsParam, path = '', isSandbox?: boolean) {
     return fetch(`${isSandbox ? 'https://sandbox.api.sgroup.qq.com' : 'https://api.sgroup.qq.com'}${path}`, {
         headers: {
-            'User-Agent': `QQGuildNodeSDK/v${version}`,
+            'User-Agent': `QQGuildNodeSDK/feilongproject`,
             'Authorization': `Bot ${config.appID}.${config.token}`,
         }
     });

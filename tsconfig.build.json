@@ -1,16 +1,14 @@
 {
     "compilerOptions": {
-        "outDir": "./lib",
-        "declaration": true,
+        "outDir": "./dist",
         "module": "commonjs",
-        "target": "esnext",
-        "lib": ["esnext"],
+        "target": "es6",
+        "moduleResolution": "node",
+        "alwaysStrict": true,
         "strict": true,
         "preserveConstEnums": true,
-        "moduleResolution": "node",
-        "esModuleInterop": true,
-        "resolveJsonModule": true
+        "resolveJsonModule": true,
+        "declaration": true
     },
-    "include": ["src"],
-    "exclude": ["node_modules", "dist", "test"]
+    "exclude": ["./test"]
 }

@@ -4,6 +4,6 @@
         "ts": "tsc"
     },
     "watch": ["src/"],
-    "exec": "ts-node test/index.ts",
+    "exec": "ts-node test/index.ts --files",
     "ext": "ts"
 }

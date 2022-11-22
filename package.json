@@ -1,11 +1,21 @@
 {
     "name": "qq-guild-bot-sdk",
-    "version": "1.0.0",
+    "version": "0.1.0",
     "description": "QQ频道机器人nodeSDK",
-    "main": "lib/index.js",
+    "main": "dist/index.js",
+    "files": [
+        "package.json",
+        "dist",
+        "LICENSE",
+        "README.md"
+    ],
+    "directories": {
+        "lib": "./dist",
+        "example": "./example"
+    },
     "scripts": {
         "dev": "clear && nodemon",
-        "build": "./node_modules/.bin/tsc -p ./tsconfig.build.json"
+        "build": "tsc -p ./tsconfig.build.json"
     },
     "repository": {
         "type": "git",
