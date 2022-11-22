@@ -1,0 +1,34 @@
+# This workflow will run tests using node and then publish a package to GitHub Packages when a release is created
+# For more information see: https://docs.github.com/en/actions/publishing-packages/publishing-nodejs-packages
+
+name: Node.js Package
+
+# 触发工作流程的事件
+on:
+    release:
+        types: [created]
+    workflow_dispatch:
+
+# 按顺序运行作业
+jobs:
+    publish-npm:
+        # 指定的运行器环境
+        runs-on: ubuntu-latest
+        steps:
+            # 拉取 github 仓库代码
+            - uses: actions/checkout@v3
+            # 设定 node 环境
+            - uses: actions/setup-node@v3
+              with:
+                  node-version: 16
+                  registry-url: https://registry.npmjs.org/
+            # 安装依赖，相当于 npm ci
+            - name: 安装依赖
+              run: npm install
+            # 执行构建步骤
+            - name: 构建
+              run: |
+                  npm run build
+            - run: npm publish
+              env:
+                  NODE_AUTH_TOKEN: ${{secrets.npm_token}}
