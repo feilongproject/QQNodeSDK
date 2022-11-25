@@ -1,6 +1,6 @@
 {
     "name": "qq-guild-bot-sdk",
-    "version": "0.1.0",
+    "version": "0.1.2",
     "description": "QQ频道机器人nodeSDK",
     "main": "dist/index.js",
     "files": [
