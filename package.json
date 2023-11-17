@@ -1,15 +1,25 @@
 {
     "name": "qq-bot-sdk",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "description": "QQ机器人nodeSDK",
     "module": "es/index.js",
     "main": "lib/index.js",
     "typings": "typings/index.d.ts",
+    "publishConfig": {
+        "registry": "https://registry.npmjs.org/"
+    },
+    "keywords": [
+        "tencent",
+        "nodejs",
+        "qq",
+        "channel",
+        "guild",
+        "bot"
+    ],
     "files": [
-        "package.json",
-        "dist",
-        "LICENSE",
-        "README.md"
+        "es",
+        "lib",
+        "typings"
     ],
     "directories": {
         "lib": "./dist",
