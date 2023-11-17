@@ -1,2 +1,3 @@
-# QQGuildNodeSDK
-QQ频道机器人nodeSDK
+# QQNodeSDK
+
+QQ 机器人 nodeSDK

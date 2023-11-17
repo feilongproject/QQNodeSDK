@@ -1,7 +1,7 @@
 {
-    "name": "qq-guild-bot-sdk",
+    "name": "qq-bot-sdk",
     "version": "0.1.2",
-    "description": "QQ频道机器人nodeSDK",
+    "description": "QQ机器人nodeSDK",
     "main": "dist/index.js",
     "files": [
         "package.json",
@@ -19,14 +19,14 @@
     },
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/feilongproject/QQGuildNodeSDK.git"
+        "url": "git+https://github.com/feilongproject/QQNodeSDK.git"
     },
     "author": "feilongproject",
     "license": "AGPL3.0",
     "bugs": {
-        "url": "https://github.com/feilongproject/QQGuildNodeSDK/issues"
+        "url": "https://github.com/feilongproject/QQNodeSDK/issues"
     },
-    "homepage": "https://github.com/feilongproject/QQGuildNodeSDK#readme",
+    "homepage": "https://github.com/feilongproject/QQNodeSDK#readme",
     "devDependencies": {
         "@types/node-fetch": "^2.6.2",
         "@types/ws": "^8.5.3",
