@@ -17,6 +17,7 @@ import Announce from './announce';
 import Schedule from './schedule';
 import GuildPermissions from './guild-permissions';
 import Interaction from './interaction';
+import Group from "./group";
 import { addUserAgent, addAuthorization, buildUrl } from '@src/utils/utils';
 import {
   GuildAPI,
@@ -37,6 +38,7 @@ import {
   ReactionAPI,
   PinsMessageAPI,
   InteractionAPI,
+  GroupAPI,
 } from '@src/types';
 export const apiVersion = 'v1';
 export class OpenAPI implements IOpenAPI {
@@ -64,6 +66,7 @@ export class OpenAPI implements IOpenAPI {
   public interactionApi!: InteractionAPI;
   public pinsMessageApi!: PinsMessageAPI;
   public guildPermissionsApi!: GuildPermissionsAPI;
+  public groupApi!: GroupAPI;
 
   constructor(config: Config) {
     this.config = config;
@@ -88,6 +91,7 @@ export class OpenAPI implements IOpenAPI {
     client.reactionApi = new Reaction(this.request, this.config);
     client.interactionApi = new Interaction(this.request, this.config);
     client.pinsMessageApi = new PinsMessage(this.request, this.config);
+    client.groupApi = new Group(this.request, this.config);
   }
   // 基础rest请求
   public request<T extends Record<any, any> = any>(options: RequestOptions): Promise<RestyResponse<T>> {

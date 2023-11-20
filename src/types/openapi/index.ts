@@ -15,6 +15,7 @@ import { ReactionAPI } from './v1/reaction';
 import { InteractionAPI } from './v1/interaction';
 import { PinsMessageAPI } from './v1/pins-message';
 import { GuildPermissionsAPI } from './v1/guild-permission';
+import { GroupAPI } from "./v1/group";
 
 export type OpenAPIRequest = <T extends Record<any, any> = any>(options: RequestOptions) => Promise<RestyResponse<T>>;
 
@@ -43,6 +44,7 @@ export interface IOpenAPI {
   reactionApi: ReactionAPI;
   interactionApi: InteractionAPI;
   pinsMessageApi: PinsMessageAPI;
+  groupApi: GroupAPI;
 }
 
 export type APIVersion = `v${number}`;
@@ -74,3 +76,4 @@ export * from './v1/reaction';
 export * from './v1/interaction';
 export * from './v1/pins-message';
 export * from './v1/guild-permission';
+export * from './v1/group';
