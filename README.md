@@ -26,7 +26,7 @@ await client.groupApi
 
 await client.groupApi
     .postFile(data.msg.group_id, {
-        file_type: 1,
+        file_type: 1, //参数: 1.图片 2.视频 3.语音 4.文件（暂不开放）// 文件格式: 图片png/jpg 视频mp4 语音silk
         url: "文件url",
         srv_send_msg: true,
     })
