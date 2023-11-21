@@ -15,6 +15,7 @@ export interface GMessageToCreate {
     content: string;
     msg_type: number; // 0 是文本，1 图文混排 ，2 是 markdown 3 ark，4 embed
     msg_id?: string;
+    msg_seq?: number;
 }
 
 export interface GFileToCreate {
@@ -32,4 +33,6 @@ export interface GMessageRec {
 
 export interface GFileRec {
     file_uuid: string;
+    file_info?: string;
+    ttl?: string;
 }

@@ -23,7 +23,7 @@ export default class Group implements GroupAPI {
         return this.request<GMessageRec>(options);
     }
 
-    // 发送消息
+    // 发送文件
     public postFile(openID: string, message: GFileToCreate): Promise<RestyResponse<GFileRec>> {
         const options = {
             method: 'POST' as const,

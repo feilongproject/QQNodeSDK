@@ -19,6 +19,7 @@ await client.groupApi
     .postMessage(data.msg.group_id, { // 填入 group_id
         content: "hello world", // 填入要回复的内容
         msg_id: data.msg.id, // 被动回复需要带上 msg_id
+        msg_seq: 1, // 回复消息的序号，与 msg_id 联合使用，避免相同消息id回复重复发送，不填默认是1(非sdk默认)。相同的 msg_id + msg_seq 重复发送会失败。
     })
     .then((res) => {
         console.log(res.data);
