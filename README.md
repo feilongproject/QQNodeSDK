@@ -16,19 +16,19 @@ ws.on(AvailableIntentsEventsEnum.CHAT, async (data) => {
 
 ```js
 await client.groupApi
-    .postMessage(data.msg.group_id, {
-        content: "hello world",
-        msg_id: data.msg.id,
+    .postMessage(data.msg.group_id, { // 填入 group_id
+        content: "hello world", // 填入要回复的内容
+        msg_id: data.msg.id, // 被动回复需要带上 msg_id
     })
     .then((res) => {
         console.log(res.data);
     }); // 发送消息
 
 await client.groupApi
-    .postFile(data.msg.group_id, {
-        file_type: 1, //参数: 1.图片 2.视频 3.语音 4.文件（暂不开放）// 文件格式: 图片png/jpg 视频mp4 语音silk
-        url: "文件url",
-        srv_send_msg: true,
+    .postFile(data.msg.group_id, { // 填入 group_id
+        file_type: 1, // 参数: 1.图片 2.视频 3.语音 4.文件（暂不开放）// 文件格式: 图片png/jpg 视频mp4 语音silk
+        url: "文件url", // 填入要发送的文件 url
+        srv_send_msg: true, // 根据文档必须为 true
     })
     .then((res) => {
         console.log(res.data);

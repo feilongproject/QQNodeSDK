@@ -2,5 +2,6 @@
 
 ## 步骤
 
-- 1、将 `config.example.json` 重命名为 `config.json`，并更新相关配置信息
-- 2、`yarn example`
+1. 使用 `npm i qq-bot-sdk` 安装依赖
+2. 更改 `index.js` 中的配置选项
+3. 使用 `npm run example` 启动例子

@@ -17,7 +17,7 @@ ws.on('READY', (wsdata) => {
 ws.on('ERROR', (data) => {
     console.log('[ERROR] 事件接收 :', data);
 });
-ws.on('GUILDS', (data) => {
+ws.on(AvailableIntentsEventsEnum.GUILDS, (data) => {
     console.log('[GUILDS] 事件接收 :', data);
 });
 ws.on(AvailableIntentsEventsEnum.GUILD_MEMBERS, (data) => {
@@ -44,30 +44,34 @@ ws.on(AvailableIntentsEventsEnum.FORUMS_EVENT, (data) => {
 ws.on(AvailableIntentsEventsEnum.AUDIO_ACTION, (data) => {
     console.log('[AUDIO_ACTION] 事件接收 :', data);
 });
-ws.on(AvailableIntentsEventsEnum.PUBLIC_GUILD_MESSAGES, async (eventData) => {
-    console.log('[PUBLIC_GUILD_MESSAGES] 事件接收 :', eventData);
-    const { data } = await client.messageApi.postMessage('', {
-        content: 'test'
-    })
-    console.log(data);
+ws.on(AvailableIntentsEventsEnum.PUBLIC_GUILD_MESSAGES, async (data) => {
+    console.log('[PUBLIC_GUILD_MESSAGES] 事件接收 :', data);
+
+    // ===== 下方为发送消息接口，请按需取消注释 ======
+
+    // await client.messageApi.postMessage(data.msg.channel_id, {
+    //     content: '测试信息'
+    // }); // 发送频道消息
 });
 
 ws.on(AvailableIntentsEventsEnum.CHAT, async (data) => {
-    console.log('[CHAT] 事件接收 :', data.msg);
+    console.log('[CHAT] 事件接收 :', data);
 
-    await client.groupApi.postMessage(data.msg.group_id, {
-        content: "",
-        msg_id: data.msg.id,
-    }).then(res => {
-        console.log(res.data);
-    });
+    // ===== 下方为发送消息接口，请按需取消注释 ======
 
-    await client.groupApi.postFile(data.msg.group_id, {
-        file_type: 1,
-        url: "",
-        srv_send_msg: true,
-    }).then(res => {
-        console.log(res.data);
-    });
+    // await client.groupApi.postMessage(data.msg.group_id, {
+    //     content: "测试文本",
+    //     msg_id: data.msg.id,
+    // }).then(res => {
+    //     console.log(res.data);
+    // }); // 发送群消息
+
+    // await client.groupApi.postFile(data.msg.group_id, {
+    //     file_type: 1, // 参数: 1.图片 2.视频 3.语音 4.文件（暂不开放）// 文件格式: 图片png/jpg 视频mp4 语音silk
+    //     url: "要发送的文件url",
+    //     srv_send_msg: true, // 根据文档必须为true
+    // }).then(res => {
+    //     console.log(res.data);
+    // }); // 发送群文件
 });
 
