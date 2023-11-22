@@ -14,26 +14,50 @@ ws.on(AvailableIntentsEventsEnum.CHAT, async (data) => {
 
 ## 新增群消息发送功能
 
+### 发送富媒体文件（主动）
+
 ```js
 await client.groupApi
-    .postMessage(data.msg.group_id, { // 填入 group_id
+    .postFile(data.msg.group_id, {
+        file_type: 1, // 参数: 1.图片 2.视频 3.语音 4.文件（暂不开放）// 文件格式: 图片png/jpg 视频mp4 语音silk
+        url: "文件url", // 填入要发送的文件 url
+        srv_send_msg: true, // 为 true 时，消息会直接发送到目标端，占用主动消息频次，超频会发送失败。
+    })
+    .then((res) => {
+        console.log(res.data);
+    }); // 主动发送文件
+```
+
+### 发送文本消息
+
+```js
+await client.groupApi
+    .postMessage(data.msg.group_id, {
         content: "hello world", // 填入要回复的内容
-        msg_id: data.msg.id, // 被动回复需要带上 msg_id
+        msg_id: data.msg.id, // 被动回复需要带上 msg_id （有效期为5分钟）
         msg_seq: 1, // 回复消息的序号，与 msg_id 联合使用，避免相同消息id回复重复发送，不填默认是1(非sdk默认)。相同的 msg_id + msg_seq 重复发送会失败。
     })
     .then((res) => {
         console.log(res.data);
     }); // 发送消息
+```
 
-await client.groupApi
-    .postFile(data.msg.group_id, { // 填入 group_id
-        file_type: 1, // 参数: 1.图片 2.视频 3.语音 4.文件（暂不开放）// 文件格式: 图片png/jpg 视频mp4 语音silk
-        url: "文件url", // 填入要发送的文件 url
-        srv_send_msg: true, // 根据文档必须为 true
-    })
-    .then((res) => {
-        console.log(res.data);
-    }); // 发送文件
+### 发送图文混排/被动 富媒体
+
+> 请妥善利用发送文件时返回的 ttl 做好缓存处理
+
+```js
+const fileRes = await client.groupApi.postFile(data.msg.group_id, {
+    file_type: 1, // 参数见上文
+    url: "https://www.w3school.com.cn/i/eg_tulip.jpg",
+    srv_send_msg: false, // 设置为 false 不发送到目标端，仅拿到文件信息
+}); // 拿到文件信息
+await client.groupApi.postMessage(data.msg.group_id, {
+    msg_type: 7, // 发送富媒体
+    content: "这是图文混排消息", // 当且仅当文件为图片时，才能实现图文混排，其余类型文件 content 会被忽略
+    media: { file_info: fileRes.data.file_info },
+    msg_id: data.msg.id,
+}); // 通过文件信息发送文件
 ```
 
 # 本地开发

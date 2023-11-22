@@ -12,16 +12,21 @@ export interface GroupAPI {
 }
 
 export interface GMessageToCreate {
-    content: string;
-    msg_type: number; // 0 是文本，1 图文混排 ，2 是 markdown 3 ark，4 embed
+    content?: string;
+    msg_type: number; // 0. 文本 1. 图文混排 2. markdown 3. ark 4. embed 7. media 富媒体
     msg_id?: string;
     msg_seq?: number;
+    media?: GMedia;
+}
+
+export interface GMedia {
+    file_info: string;
 }
 
 export interface GFileToCreate {
-    file_type: number; // 1 图片，2 视频，3 语音，4 文件（暂不开放）// 图片：png/jpg，视频：mp4，语音：silk
+    file_type: number; // 参数: 1.图片 2.视频 3.语音 4.文件（暂不开放）// 文件格式: 图片png/jpg 视频mp4 语音silk
     url: string;
-    srv_send_msg: boolean;
+    srv_send_msg: boolean; // 当为 true 消息会直接发送到目标端，占用 主动消息频次，超频会发送失败。为 false 时消息不会直接发送到目标端，返回的 file_info 字段数据，可使用在消息发送接口 media 字段中
 }
 
 export interface GMessageRec {
@@ -33,6 +38,6 @@ export interface GMessageRec {
 
 export interface GFileRec {
     file_uuid: string;
-    file_info?: string;
-    ttl?: string;
+    file_info: string;
+    ttl: string;
 }
