@@ -4,7 +4,7 @@ const { createOpenAPI, createWebsocket, AvailableIntentsEventsEnum } = require('
 const testConfigWs = {
     appID: '',
     token: '',
-    intents: [AvailableIntentsEventsEnum.CHAT],
+    intents: [AvailableIntentsEventsEnum.GROUP],
 };
 
 const client = createOpenAPI(testConfigWs);
@@ -54,8 +54,8 @@ ws.on(AvailableIntentsEventsEnum.PUBLIC_GUILD_MESSAGES, async (data) => {
     // }); // 发送频道消息
 });
 
-ws.on(AvailableIntentsEventsEnum.CHAT, async (data) => {
-    console.log('[CHAT] 事件接收 :', data);
+ws.on(AvailableIntentsEventsEnum.GROUP, async (data) => {
+    console.log('[GROUP] 事件接收 :', data);
 
     // ===== 下方为发送消息接口，请按需取消注释 ======
 
