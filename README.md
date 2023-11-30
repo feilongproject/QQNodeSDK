@@ -7,8 +7,8 @@ QQ 机器人 SDK，基于 [官方 SDK](https://github.com/tencent-connect/bot-no
 ## 新增群消息订阅事件
 
 ```js
-ws.on(AvailableIntentsEventsEnum.CHAT, async (data) => {
-    console.log("[CHAT] 事件接收 :", data);
+ws.on(AvailableIntentsEventsEnum.GROUP, async (data) => {
+    console.log("[GROUP] 事件接收 :", data);
 });
 ```
 
