@@ -103,6 +103,18 @@ export interface MessageToCreate {
   image?: string;
   msg_id?: string; // 要回复的消息id,不为空则认为是被动消息,公域机器人会异步审核，不为空是被动消息，公域机器人会校验语料
   keyboard?: MessageKeyboard;
+  markdown?: MessageMarkdown;
+}
+
+export interface MessageMarkdown {
+  custom_template_id?: string;
+  content?: string;
+  params?: MessageMarkdownParam[];
+}
+
+export interface MessageMarkdownParam {
+  key: string;
+  values: string[];
 }
 
 // MessageKeyboard 消息按钮组件
