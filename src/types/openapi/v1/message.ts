@@ -43,7 +43,7 @@ export interface Ark {
 export interface ArkKV {
   key: string;
   value: string;
-  obj: ArkObj[];
+  obj?: ArkObj[];
 }
 
 // ArkObj Ark 对象
