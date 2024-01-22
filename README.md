@@ -2,6 +2,33 @@
 
 QQ 机器人 SDK，基于 [官方 SDK](https://github.com/tencent-connect/bot-node-sdk) 改版而来，增加群消息接收与发送功能，修复诸多错误
 
+# 使用方法
+
+## 安装
+
+```shell
+npm i qq-bot-sdk --registry=https://registry.npmjs.org
+```
+
+## 引用
+
+> 可参见[example](/example)中样例
+
+```js
+const { createOpenAPI, createWebsocket, AvailableIntentsEventsEnum } = require("qq-bot-sdk"); // commonjs引用方法
+import { createOpenAPI, createWebsocket, AvailableIntentsEventsEnum } from "qq-bot-sdk"; // es引用方法
+// 注意：以上两种引用方法只能选择一种方式使用！
+
+const testConfigWs = {
+    appID: "APPID",
+    token: "TOKEN",
+    intents: [AvailableIntentsEventsEnum.GUILD_MESSAGES], // 设置监听类型
+};
+
+const client = createOpenAPI(testConfigWs); // 创建client实例（用于发送消息）
+const ws = createWebsocket(testConfigWs); // 创建ws实例（用于接收消息）
+```
+
 # 对比优化内容
 
 ## 新增群消息订阅事件
