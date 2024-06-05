@@ -21,6 +21,7 @@ export interface GMessageToCreate {
     ark?: Ark;
     keyboard?: MessageKeyboard;
     markdown?: MessageMarkdown;
+    event_id?: string;
 }
 
 export interface GMedia {
