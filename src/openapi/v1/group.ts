@@ -36,4 +36,19 @@ export default class Group implements GroupAPI {
         return this.request<GFileRec>(options);
     }
 
+    // 撤回消息
+    public deleteMessage(openID: string, messageID: string): Promise<RestyResponse<any>> {
+        const params = Object.create(null);
+        const options = {
+            method: 'DELETE' as const,
+            url: getURL('groupMessageURI'),
+            rest: {
+                openID,
+                messageID,
+            },
+            params,
+        };
+        return this.request(options);
+    }
+
 }

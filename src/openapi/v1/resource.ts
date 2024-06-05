@@ -37,6 +37,7 @@ const apiMap = {
   guildVoiceMembersURI: '/channels/:channelID/voice/members', // 语音子频道在线成员车查询
   botMic: '/channels/:channelID/mic', // 机器人上麦|下麦
   groupMessagesURI: '/v2/groups/:openID/messages',
+  groupMessageURI: '/v2/groups/:openID/messages/:messageID',
   groupFilesURI: '/v2/groups/:openID/files',
 };
 export const getURL = (endpoint: keyof typeof apiMap) => apiMap[endpoint];
