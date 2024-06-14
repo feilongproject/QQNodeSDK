@@ -1,8 +1,8 @@
-import { Config, OpenAPIRequest, GroupAPI, GMessageToCreate, GMessageRec, GFileRec, GFileToCreate } from '@src/types';
+import { Config, OpenAPIRequest, C2CAPI, GMessageToCreate, GMessageRec, GFileRec, GFileToCreate } from '@src/types';
 import { RestyResponse } from 'resty-client';
 import { getURL } from './resource';
 
-export default class C2C implements GroupAPI {
+export default class C2C implements C2CAPI {
     public request: OpenAPIRequest;
     public config: Config;
     constructor(request: OpenAPIRequest, config: Config) {
