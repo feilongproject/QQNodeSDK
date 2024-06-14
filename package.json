@@ -1,6 +1,6 @@
 {
     "name": "qq-bot-sdk",
-    "version": "1.5.0",
+    "version": "1.6.0",
     "description": "QQ机器人nodeSDK",
     "module": "es/index.js",
     "main": "lib/index.js",
@@ -58,15 +58,15 @@
         "@rollup/plugin-json": "^4.1.0",
         "@rollup/plugin-node-resolve": "^13.0.4",
         "@rollup/plugin-replace": "^3.0.0",
-        "@types/ws": "^8.5.3",
         "@types/jest": "^27.0.2",
+        "@types/ws": "^8.5.3",
         "cross-env": "^7.0.3",
+        "jest": "^25.3.0",
         "rimraf": "^3.0.2",
         "rollup": "^2.56.2",
         "rollup-plugin-dts": "^4.0.0",
         "rollup-plugin-typescript-paths": "^1.3.0",
-        "typescript": "^4.4.4",
-        "jest": "^25.3.0"
+        "typescript": "^4.4.4"
     },
     "dependencies": {
         "axios": "0.24.0",

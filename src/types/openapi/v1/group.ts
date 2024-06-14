@@ -9,7 +9,7 @@ export interface GroupAPI {
     // messages: (channelID: string, pager: MessagesPager) => Promise<RestyResponse<IMessage[]>>;
     postMessage: (openID: string, message: GMessageToCreate) => Promise<RestyResponse<GMessageRec>>;
     postFile: (openID: string, message: GFileToCreate) => Promise<RestyResponse<GFileRec>>;
-    // deleteMessage: (channelID: string, messageID: string, hideTip?: boolean) => Promise<RestyResponse<any>>;
+    deleteMessage: (openID: string, messageID: string) => Promise<RestyResponse<any>>;
 }
 
 export interface GMessageToCreate {

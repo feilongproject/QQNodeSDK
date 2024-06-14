@@ -83,7 +83,7 @@ export enum AvailableIntentsEventsEnum {
   PUBLIC_GUILD_MESSAGES = 'PUBLIC_GUILD_MESSAGES',
   MESSAGE_AUDIT = 'MESSAGE_AUDIT',
   INTERACTION = 'INTERACTION',
-  GROUP = "GROUP",
+  GROUP_AND_C2C_EVENT = "GROUP_AND_C2C_EVENT",
 }
 
 // OpenAPI传过来的事件类型
@@ -140,12 +140,17 @@ export const WsEventType: { [key: string]: AvailableIntentsEventsEnum } = {
   AT_MESSAGE_CREATE: AvailableIntentsEventsEnum.PUBLIC_GUILD_MESSAGES, // 机器人被@时触发
   PUBLIC_MESSAGE_DELETE: AvailableIntentsEventsEnum.PUBLIC_GUILD_MESSAGES, // 当频道的消息被删除时
 
-  //  ======= GROUP ======
-  GROUP_ADD_ROBOT: AvailableIntentsEventsEnum.GROUP,
-  GROUP_DEL_ROBOT: AvailableIntentsEventsEnum.GROUP,
-  GROUP_MSG_REJECT: AvailableIntentsEventsEnum.GROUP,
-  GROUP_MSG_RECEIVE: AvailableIntentsEventsEnum.GROUP,
-  GROUP_AT_MESSAGE_CREATE: AvailableIntentsEventsEnum.GROUP,
+  //  ======= GROUP_AND_C2C_EVENT ======
+  C2C_MESSAGE_CREATE: AvailableIntentsEventsEnum.GROUP_AND_C2C_EVENT, // 用户单聊发消息给机器人时候
+  FRIEND_ADD: AvailableIntentsEventsEnum.GROUP_AND_C2C_EVENT, // 用户添加使用机器人
+  FRIEND_DEL: AvailableIntentsEventsEnum.GROUP_AND_C2C_EVENT, // 用户删除机器人
+  C2C_MSG_REJECT: AvailableIntentsEventsEnum.GROUP_AND_C2C_EVENT, // 用户在机器人资料卡手动关闭"主动消息"推送
+  C2C_MSG_RECEIVE: AvailableIntentsEventsEnum.GROUP_AND_C2C_EVENT, // 用户在机器人资料卡手动开启"主动消息"推送开关
+  GROUP_AT_MESSAGE_CREATE: AvailableIntentsEventsEnum.GROUP_AND_C2C_EVENT, // 用户在群里@机器人时收到的消息
+  GROUP_ADD_ROBOT: AvailableIntentsEventsEnum.GROUP_AND_C2C_EVENT, // 机器人被添加到群聊
+  GROUP_DEL_ROBOT: AvailableIntentsEventsEnum.GROUP_AND_C2C_EVENT, // 机器人被移出群聊
+  GROUP_MSG_REJECT: AvailableIntentsEventsEnum.GROUP_AND_C2C_EVENT, // 群管理员主动在机器人资料页操作关闭通知
+  GROUP_MSG_RECEIVE: AvailableIntentsEventsEnum.GROUP_AND_C2C_EVENT, // 群管理员主动在机器人资料页操作开启通知
 };
 
 export const WSCodes = {
@@ -241,7 +246,7 @@ export const IntentEvents: IntentEventsMapType = {
   GUILD_MESSAGES: 1 << 9,
   GUILD_MESSAGE_REACTIONS: 1 << 10,
   DIRECT_MESSAGE: 1 << 12,
-  GROUP: 1 << 25,
+  GROUP_AND_C2C_EVENT: 1 << 25,
   INTERACTION: 1 << 26,
   MESSAGE_AUDIT: 1 << 27,
   FORUMS_EVENT: 1 << 28,

@@ -39,5 +39,8 @@ const apiMap = {
   groupMessagesURI: '/v2/groups/:openID/messages',
   groupMessageURI: '/v2/groups/:openID/messages/:messageID',
   groupFilesURI: '/v2/groups/:openID/files',
+  c2cMessagesURI: '/v2/users/:openID/messages',
+  c2cMessageURI: '/v2/groups/:openID/messages/:messageID',
+  c2cFilesURI: '/v2/groups/:openID/files',
 };
 export const getURL = (endpoint: keyof typeof apiMap) => apiMap[endpoint];

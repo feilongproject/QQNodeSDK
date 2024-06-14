@@ -1,4 +1,4 @@
-import { AxiosRequestHeaders } from 'axios';
+import { AxiosHeaders, RawAxiosRequestHeaders } from 'axios';
 import { version } from '../../package.json';
 import { BotLogger } from '@src/utils/logger';
 
@@ -38,12 +38,12 @@ export const has = (o: any, k: any) => Object.prototype.hasOwnProperty.call(o, k
 export const getTimeStampNumber = () => Number(new Date().getTime().toString().substr(0, 10));
 
 // 添加 User-Agent
-export const addUserAgent = (header: AxiosRequestHeaders) => {
+export const addUserAgent = (header: RawAxiosRequestHeaders | AxiosHeaders) => {
   const sdkVersion = version;
   header['User-Agent'] = `BotNodeSDK/v${sdkVersion}`;
 };
 // 添加 User-Agent
-export const addAuthorization = (header: AxiosRequestHeaders, appID: string, token: string) => {
+export const addAuthorization = (header: RawAxiosRequestHeaders | AxiosHeaders, appID: string, token: string) => {
   header['Authorization'] = `Bot ${appID}.${token}`;
 };
 // 组装完整Url

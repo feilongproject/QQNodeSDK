@@ -4,7 +4,7 @@ const { createOpenAPI, createWebsocket, AvailableIntentsEventsEnum } = require('
 const testConfigWs = {
     appID: '',
     token: '',
-    intents: [AvailableIntentsEventsEnum.GROUP],
+    intents: [AvailableIntentsEventsEnum.GROUP_AND_C2C_EVENT],
 };
 
 const client = createOpenAPI(testConfigWs);
@@ -54,10 +54,15 @@ ws.on(AvailableIntentsEventsEnum.PUBLIC_GUILD_MESSAGES, async (data) => {
     // }); // 发送频道消息
 });
 
-ws.on(AvailableIntentsEventsEnum.GROUP, async (data) => {
-    console.log('[GROUP] 事件接收 :', data);
+ws.on(AvailableIntentsEventsEnum.GROUP_AND_C2C_EVENT, async (data) => {
+    console.log('[GROUP_AND_C2C_EVENT] 事件接收 :', data);
 
     // ===== 下方为发送消息接口，请按需取消注释 ======
+
+    // await client.c2cApi.postMessage(data.msg.author.id, {
+    //     content: "测试文本",
+    //     msg_id: data.msg.id,
+    // });
 
     // await client.groupApi.postMessage(data.msg.group_id, {
     //     content: "测试文本",

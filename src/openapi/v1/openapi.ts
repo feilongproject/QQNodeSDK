@@ -18,7 +18,7 @@ import Schedule from './schedule';
 import GuildPermissions from './guild-permissions';
 import Interaction from './interaction';
 import Group from "./group";
-import { addUserAgent, addAuthorization, buildUrl } from '@src/utils/utils';
+import C2C from './c2c';
 import {
   GuildAPI,
   ChannelAPI,
@@ -39,7 +39,9 @@ import {
   PinsMessageAPI,
   InteractionAPI,
   GroupAPI,
+  C2CAPI,
 } from '@src/types';
+import { addUserAgent, addAuthorization, buildUrl } from '@src/utils/utils';
 export const apiVersion = 'v1';
 export class OpenAPI implements IOpenAPI {
   static newClient(config: Config) {
@@ -67,6 +69,7 @@ export class OpenAPI implements IOpenAPI {
   public pinsMessageApi!: PinsMessageAPI;
   public guildPermissionsApi!: GuildPermissionsAPI;
   public groupApi!: GroupAPI;
+  public c2cApi!: C2CAPI;
 
   constructor(config: Config) {
     this.config = config;
@@ -92,6 +95,7 @@ export class OpenAPI implements IOpenAPI {
     client.interactionApi = new Interaction(this.request, this.config);
     client.pinsMessageApi = new PinsMessage(this.request, this.config);
     client.groupApi = new Group(this.request, this.config);
+    client.c2cApi = new C2C(this.request, this.config);
   }
   // 基础rest请求
   public request<T extends Record<any, any> = any>(options: RequestOptions): Promise<RestyResponse<T>> {
