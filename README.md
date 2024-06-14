@@ -34,12 +34,14 @@ const ws = createWebsocket(testConfigWs); // 创建ws实例（用于接收消息
 ## 新增群消息订阅事件
 
 ```js
-ws.on(AvailableIntentsEventsEnum.GROUP, async (data) => {
-    console.log("[GROUP] 事件接收 :", data);
+ws.on(AvailableIntentsEventsEnum.GROUP_AND_C2C_EVENT, async (data) => {
+    console.log("[GROUP_AND_C2C_EVENT] 事件接收 :", data);
 });
 ```
 
-## 新增群消息发送功能
+## 新增 群&私聊 场景下，消息发送功能
+
+> 注意：群聊场景下请使用 `client.groupApi`，私聊场景下请使用 `client.c2cApi`，后方内容基本相同
 
 ### 发送富媒体文件（主动）
 

@@ -1,6 +1,6 @@
 {
     "name": "qq-bot-sdk",
-    "version": "1.6.0",
+    "version": "1.6.1",
     "description": "QQ机器人nodeSDK",
     "module": "es/index.js",
     "main": "lib/index.js",
