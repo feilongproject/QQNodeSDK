@@ -24,7 +24,7 @@ jobs:
                   registry-url: https://registry.npmjs.org/
             # 安装依赖，相当于 npm ci
             - name: 安装依赖
-              run: npm install
+              run: yarn install
             # 执行构建步骤
             - name: 构建
               run: |
