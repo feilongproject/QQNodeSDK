@@ -4,7 +4,7 @@
         "strict": true,
         "lib": ["esnext"],
         "typeRoots": ["src/types"],
-        "types": ["node", "@types/jest"],
+        "types": ["node"],
         "target": "esnext",
         "module": "esnext",
         "moduleResolution": "node",

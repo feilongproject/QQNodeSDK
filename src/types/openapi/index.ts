@@ -17,6 +17,7 @@ import { PinsMessageAPI } from './v1/pins-message';
 import { GuildPermissionsAPI } from './v1/guild-permission';
 import { GroupAPI } from "./v1/group";
 import { C2CAPI } from "./v1/c2c";
+import { WebhookAPI } from '@src/utils/webhook';
 
 export type OpenAPIRequest = <T extends Record<any, any> = any>(options: RequestOptions) => Promise<RestyResponse<T>>;
 
@@ -24,6 +25,7 @@ export interface Config {
   appID: string;
   token: string;
   sandbox?: boolean;
+  secret?: string;
 }
 
 export interface IOpenAPI {
@@ -47,6 +49,7 @@ export interface IOpenAPI {
   pinsMessageApi: PinsMessageAPI;
   groupApi: GroupAPI;
   c2cApi: C2CAPI;
+  webhookApi: WebhookAPI;
 }
 
 export type APIVersion = `v${number}`;

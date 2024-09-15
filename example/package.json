@@ -1,11 +1,18 @@
 {
-  "name": "example",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "example": "node index.js"
-  },
-  "author": "",
-  "license": "ISC"
+    "name": "example",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "example": "node index.js",
+        "example:webhook": "node webhook/index.js"
+    },
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+        "@types/koa-router": "^7.4.8",
+        "koa": "^2.15.3",
+        "koa-body": "^6.0.1",
+        "koa-router": "^13.0.1"
+    }
 }

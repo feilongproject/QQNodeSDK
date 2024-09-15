@@ -41,6 +41,7 @@ import {
   GroupAPI,
   C2CAPI,
 } from '@src/types';
+import { WebhookAPI } from '@src/utils/webhook';
 import { addUserAgent, addAuthorization, buildUrl } from '@src/utils/utils';
 export const apiVersion = 'v1';
 export class OpenAPI implements IOpenAPI {
@@ -70,6 +71,7 @@ export class OpenAPI implements IOpenAPI {
   public guildPermissionsApi!: GuildPermissionsAPI;
   public groupApi!: GroupAPI;
   public c2cApi!: C2CAPI;
+  public webhookApi!: WebhookAPI;
 
   constructor(config: Config) {
     this.config = config;
@@ -96,6 +98,7 @@ export class OpenAPI implements IOpenAPI {
     client.pinsMessageApi = new PinsMessage(this.request, this.config);
     client.groupApi = new Group(this.request, this.config);
     client.c2cApi = new C2C(this.request, this.config);
+    client.webhookApi = new WebhookAPI(this.request, this.config);
   }
   // 基础rest请求
   public request<T extends Record<any, any> = any>(options: RequestOptions): Promise<RestyResponse<T>> {

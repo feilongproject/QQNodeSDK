@@ -10,7 +10,11 @@ QQ 机器人 SDK，基于 [官方 SDK](https://github.com/tencent-connect/bot-no
 npm i qq-bot-sdk --registry=https://registry.npmjs.org
 ```
 
-## 引用
+## `webhook` 方式使用（新增）
+
+详情请见 `example` 中[`webhook`](/example/webhook) 使用案例
+
+## `websocket` 方式引用
 
 > 可参见[example](/example)中样例
 
@@ -30,6 +34,10 @@ const ws = createWebsocket(testConfigWs); // 创建ws实例（用于接收消息
 ```
 
 # 对比优化内容
+
+## 新增 `webhook` 方式调用
+
+详情请见 `example` 中[`webhook`](/example/webhook) 使用案例
 
 ## 新增群消息订阅事件
 

@@ -1,4 +1,7 @@
-// 以下仅为用法示意，详情请参照文档：https://bot.q.qq.com/wiki/develop/nodesdk/
+/**
+ * 以下仅为用法示意，详情请参照文档：https://bot.q.qq.com/wiki/develop/nodesdk/
+ * 其中对官方逻辑扩展，添加了诸多功能，修复了许多问题
+ */
 const { createOpenAPI, createWebsocket, AvailableIntentsEventsEnum } = require('qq-bot-sdk');
 
 const testConfigWs = {
