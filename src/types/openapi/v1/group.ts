@@ -30,7 +30,8 @@ export interface GMedia {
 
 export interface GFileToCreate {
     file_type: number; // 参数: 1.图片 2.视频 3.语音 4.文件（暂不开放）// 文件格式: 图片png/jpg 视频mp4 语音silk
-    url: string;
+    file_data?: string; // base64 编码后的文件
+    url?: string;
     srv_send_msg: boolean; // 当为 true 消息会直接发送到目标端，占用 主动消息频次，超频会发送失败。为 false 时消息不会直接发送到目标端，返回的 file_info 字段数据，可使用在消息发送接口 media 字段中
 }
 
