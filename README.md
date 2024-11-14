@@ -35,6 +35,22 @@ const ws = createWebsocket(testConfigWs); // 创建ws实例（用于接收消息
 
 # 对比优化内容
 
+## 新增自定义 logger 功能
+
+详情请见 `example` 中[`index.js`](/example/index.js) 使用案例
+
+```js
+const testConfigWs = {
+    appID: '',
+    token: '',
+    intents: [AvailableIntentsEventsEnum.GROUP_AND_C2C_EVENT],
+
+    // 以下是使用 log4js 用法, configure 中填写你自己的 logger 配置
+    logger: log4js.configure(...).getLogger(),
+};
+const ws = createWebsocket(testConfigWs);
+```
+
 ## 新增 `webhook` 方式调用
 
 详情请见 `example` 中[`webhook`](/example/webhook) 使用案例

@@ -1,20 +1,11 @@
 import { AxiosHeaders, RawAxiosRequestHeaders } from 'axios';
 import { version } from '../../package.json';
-import { BotLogger } from '@src/utils/logger';
 
 // 延迟
 export const delayTime = (ms: number) => {
   return new Promise((resolve) => {
     setTimeout(resolve, ms);
   });
-};
-
-// 随机延迟
-export const randomDelay = (min: number, max: number) => {
-  let ms = Math.random() * (max - min) + min;
-  ms = Math.ceil(ms);
-  BotLogger.info(`delay for ${ms} ms ...`);
-  return delayTime(ms);
 };
 
 // 转为字符串

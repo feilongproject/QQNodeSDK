@@ -22,47 +22,55 @@ import { WebhookAPI } from '@src/utils/webhook';
 export type OpenAPIRequest = <T extends Record<any, any> = any>(options: RequestOptions) => Promise<RestyResponse<T>>;
 
 export interface Config {
-  appID: string;
-  token: string;
-  sandbox?: boolean;
-  secret?: string;
+    appID: string;
+    token: string;
+    sandbox?: boolean;
+    secret?: string;
+}
+
+export interface ConfigLogger {
+    logger: Logger;
+}
+
+export interface Logger {
+    info: (message: any, ...args: any[]) => void;
 }
 
 export interface IOpenAPI {
-  config: Config;
-  request: OpenAPIRequest;
-  guildApi: GuildAPI;
-  channelApi: ChannelAPI;
-  meApi: MeAPI;
-  messageApi: MessageAPI;
-  memberApi: MemberAPI;
-  roleApi: RoleAPI;
-  muteApi: MuteAPI;
-  announceApi: AnnounceAPI;
-  scheduleApi: ScheduleAPI;
-  directMessageApi: DirectMessageAPI;
-  channelPermissionsApi: ChannelPermissionsAPI;
-  audioApi: AudioAPI;
-  guildPermissionsApi: GuildPermissionsAPI;
-  reactionApi: ReactionAPI;
-  interactionApi: InteractionAPI;
-  pinsMessageApi: PinsMessageAPI;
-  groupApi: GroupAPI;
-  c2cApi: C2CAPI;
-  webhookApi: WebhookAPI;
+    config: Config;
+    request: OpenAPIRequest;
+    guildApi: GuildAPI;
+    channelApi: ChannelAPI;
+    meApi: MeAPI;
+    messageApi: MessageAPI;
+    memberApi: MemberAPI;
+    roleApi: RoleAPI;
+    muteApi: MuteAPI;
+    announceApi: AnnounceAPI;
+    scheduleApi: ScheduleAPI;
+    directMessageApi: DirectMessageAPI;
+    channelPermissionsApi: ChannelPermissionsAPI;
+    audioApi: AudioAPI;
+    guildPermissionsApi: GuildPermissionsAPI;
+    reactionApi: ReactionAPI;
+    interactionApi: InteractionAPI;
+    pinsMessageApi: PinsMessageAPI;
+    groupApi: GroupAPI;
+    c2cApi: C2CAPI;
+    webhookApi: WebhookAPI;
 }
 
 export type APIVersion = `v${number}`;
 
 export interface Token {
-  appID: number;
-  accessToken: string;
-  type: string;
+    appID: number;
+    accessToken: string;
+    type: string;
 }
 
 // WebsocketAPI websocket 接入地址
 export interface WebsocketAPI {
-  ws: () => any;
+    ws: () => any;
 }
 
 export * from './v1/audio';

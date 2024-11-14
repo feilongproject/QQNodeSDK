@@ -49,10 +49,7 @@ export class OpenAPI implements IOpenAPI {
     return new OpenAPI(config);
   }
 
-  config: Config = {
-    appID: '',
-    token: '',
-  };
+  config: Config;
   public guildApi!: GuildAPI;
   public channelApi!: ChannelAPI;
   public meApi!: MeAPI;

@@ -3,11 +3,21 @@
  * 其中对官方逻辑扩展，添加了诸多功能，修复了许多问题
  */
 const { createOpenAPI, createWebsocket, AvailableIntentsEventsEnum } = require('qq-bot-sdk');
+const log4js = require("log4js"); // 仅在需要 logger 时使用
 
 const testConfigWs = {
     appID: '',
     token: '',
     intents: [AvailableIntentsEventsEnum.GROUP_AND_C2C_EVENT],
+
+    // // 以下是使用 log4js 自定义 logger 用法
+    // logger: log4js.configure({
+    //     appenders: { console: { type: "console", layout: { type: "pattern", pattern: "%[[%d] [%f:%l:%o] [%p]%] %m", } } },
+    //     categories: { default: { appenders: ["console"], level: "all", enableCallStack: true, } },
+    // }).getLogger(),
+
+    // // 以下是完全自定义 logger 用法
+    // logger: { info: () => { } },
 };
 
 const client = createOpenAPI(testConfigWs);
