@@ -59,8 +59,6 @@ export class Ws {
     createListening() {
         // websocket连接已开启
         this.ws.on('open', () => {
-            console.log(this.config.logger.info("233"));
-
             this.config.logger.info(`[CLIENT] 开启`);
         });
 
