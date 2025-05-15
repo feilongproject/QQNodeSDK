@@ -12,8 +12,8 @@ const Router = require("koa-router");
 
 const client = createOpenAPI({
     appID: "",
-    token: "", // 如果不使用 websocket 可留空
-    secret: "", // 如果使用 webhook 必填
+    token: "", // ws模式必填，wh模式:如果旧机器人可以使用固定token则不留空, 如果是新机器人要使用动态token则此参数留空,secret必填
+    secret: "",
 }); // 创建 client
 
 

@@ -33,7 +33,7 @@ export const addUserAgent = (header: RawAxiosRequestHeaders | AxiosHeaders) => {
   const sdkVersion = version;
   header['User-Agent'] = `BotNodeSDK/v${sdkVersion}`;
 };
-// 添加 User-Agent
+// 添加 鉴权token
 export const addAuthorization = (header: RawAxiosRequestHeaders | AxiosHeaders, appID: string, token: string) => {
   header['Authorization'] = `Bot ${appID}.${token}`;
 };
