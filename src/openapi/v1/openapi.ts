@@ -17,32 +17,11 @@ import Announce from './announce';
 import Schedule from './schedule';
 import GuildPermissions from './guild-permissions';
 import Interaction from './interaction';
-import Group from "./group";
+import Group from './group';
 import C2C from './c2c';
-import {
-  GuildAPI,
-  ChannelAPI,
-  MeAPI,
-  MessageAPI,
-  Config,
-  IOpenAPI,
-  MemberAPI,
-  RoleAPI,
-  DirectMessageAPI,
-  ChannelPermissionsAPI,
-  AudioAPI,
-  MuteAPI,
-  ScheduleAPI,
-  AnnounceAPI,
-  GuildPermissionsAPI,
-  ReactionAPI,
-  PinsMessageAPI,
-  InteractionAPI,
-  GroupAPI,
-  C2CAPI,
-} from '@src/types';
+import { GuildAPI, ChannelAPI, MeAPI, MessageAPI, Config, IOpenAPI, MemberAPI, RoleAPI, DirectMessageAPI, ChannelPermissionsAPI, AudioAPI, MuteAPI, ScheduleAPI, AnnounceAPI, GuildPermissionsAPI, ReactionAPI, PinsMessageAPI, InteractionAPI, GroupAPI, C2CAPI } from '@src/types';
 import { WebhookAPI } from '@src/utils/webhook';
-import { addUserAgent, addAuthorization, buildUrl } from '@src/utils/utils';
+import { addUserAgent, buildUrl } from '@src/utils/utils';
 export const apiVersion = 'v1';
 export class OpenAPI implements IOpenAPI {
   static newClient(config: Config) {
@@ -69,9 +48,13 @@ export class OpenAPI implements IOpenAPI {
   public groupApi!: GroupAPI;
   public c2cApi!: C2CAPI;
   public webhookApi!: WebhookAPI;
+  public accessToken: string;
+  public tokenExpires: number;
 
   constructor(config: Config) {
     this.config = config;
+    this.tokenExpires = -1;
+    this.accessToken = '';
     this.register(this);
   }
 
@@ -98,15 +81,41 @@ export class OpenAPI implements IOpenAPI {
     client.webhookApi = new WebhookAPI(this.request, this.config);
   }
   // 基础rest请求
-  public request<T extends Record<any, any> = any>(options: RequestOptions): Promise<RestyResponse<T>> {
-    const { appID, token } = this.config;
+  public async request<T extends Record<any, any> = any>(options: RequestOptions): Promise<RestyResponse<T>> {
+    const { appID, token, secret } = this.config;
 
     options.headers = { ...options.headers };
 
     // 添加 UA
     addUserAgent(options.headers);
-    // 添加鉴权信息
-    addAuthorization(options.headers, appID, token);
+
+    //是否使用固定token
+    if (token != '') {
+      options.headers['Authorization'] = `Bot ${appID}.${token}`;
+    } else {
+      if (!this.tokenExpires || this.tokenExpires < Date.now()) {
+        const tokenResp = await resty.create().post<{
+          access_token: string;
+          expires_in: string;
+        }>('https://bots.qq.com/app/getAppAccessToken', {
+          data: {
+            appId: appID,
+            clientSecret: secret,
+          },
+        });
+
+        if (!tokenResp.data.access_token || !tokenResp.data.expires_in) {
+          throw new Error(`access_token 响应格式错误: ${JSON.stringify(tokenResp.data)}`);
+        }
+
+        this.accessToken = tokenResp.data.access_token;
+        this.tokenExpires = Date.now() + parseInt(tokenResp.data.expires_in) * 1000;
+      }
+
+      // 添加鉴权信息
+      options.headers['Authorization'] = `QQBot ${this.accessToken}`;
+    }
+
     // 组装完整Url
     const botUrl = buildUrl(options.url, this.config.sandbox);
 
