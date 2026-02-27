@@ -30,6 +30,7 @@ export interface EventTypes {
 export interface GetWsParam {
   appID: string;
   token: string;
+  secret?: string;
   sandbox?: boolean;
   shards?: Array<number>;
   intents?: Array<AvailableIntentsEventsEnum>;

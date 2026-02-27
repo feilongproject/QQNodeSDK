@@ -90,7 +90,7 @@ export class OpenAPI implements IOpenAPI {
     addUserAgent(options.headers);
 
     //是否使用固定token
-    if (token != '') {
+    if (!secret && token) {
       options.headers['Authorization'] = `Bot ${appID}.${token}`;
     } else {
       if (!this.tokenExpires || this.tokenExpires < Date.now()) {

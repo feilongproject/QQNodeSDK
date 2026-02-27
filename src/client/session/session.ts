@@ -22,12 +22,43 @@ export default class Session {
     }
 
     // 新建会话
-    createSession() {
+    async createSession() {
         this.ws = new Ws(this.config, this.event, this.sessionRecord || undefined);
         // 拿到 ws地址等信息
         const reqOptions = WsObjRequestOptions(this.config.sandbox as boolean);
 
-        addAuthorization(reqOptions.headers, this.config.appID, this.config.token);
+        // 如果有secret，先获取access_token
+        if (this.config.secret) {
+            try {
+                const tokenResp = await resty.create().post<{
+                    access_token: string;
+                    expires_in: string;
+                }>('https://bots.qq.com/app/getAppAccessToken', {
+                    data: {
+                        appId: this.config.appID,
+                        clientSecret: this.config.secret,
+                    },
+                });
+
+                if (tokenResp.data.access_token) {
+                    this.config.token = tokenResp.data.access_token;
+                    // 更新ws中的config引用
+                    this.ws.config.token = this.config.token;
+                    reqOptions.headers['Authorization'] = `QQBot ${this.config.token}`;
+                } else {
+                    throw new Error('获取access_token失败');
+                }
+            } catch (e) {
+                this.config.logger.info('[ERROR] getAccessToken: ', e);
+                this.event.emit(SessionEvents.EVENT_WS, {
+                    eventType: SessionEvents.DISCONNECT,
+                    eventMsg: this.sessionRecord,
+                });
+                return;
+            }
+        } else {
+            addAuthorization(reqOptions.headers, this.config.appID, this.config.token);
+        }
 
         resty
             .create(reqOptions)

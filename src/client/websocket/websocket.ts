@@ -162,7 +162,7 @@ export class Ws {
         const authOp = {
             op: OpCode.IDENTIFY, // 鉴权参数
             d: {
-                token: `Bot ${this.config.appID}.${this.config.token}`, // 根据配置转换token
+                token: this.config.secret ? `QQBot ${this.config.token}` : `Bot ${this.config.appID}.${this.config.token}`, // 根据配置转换token
                 intents: this.getValidIntents(), // todo 接受的类型
                 shard: this.checkShards(this.config.shards) || [0, 1], // 分片信息,给一个默认值
                 properties: {
