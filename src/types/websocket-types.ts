@@ -147,6 +147,7 @@ export const WsEventType: { [key: string]: AvailableIntentsEventsEnum } = {
   FRIEND_DEL: AvailableIntentsEventsEnum.GROUP_AND_C2C_EVENT, // 用户删除机器人
   C2C_MSG_REJECT: AvailableIntentsEventsEnum.GROUP_AND_C2C_EVENT, // 用户在机器人资料卡手动关闭"主动消息"推送
   C2C_MSG_RECEIVE: AvailableIntentsEventsEnum.GROUP_AND_C2C_EVENT, // 用户在机器人资料卡手动开启"主动消息"推送开关
+  GROUP_MESSAGE_CREATE: AvailableIntentsEventsEnum.GROUP_AND_C2C_EVENT, // 机器人收到群聊消息（全量）
   GROUP_AT_MESSAGE_CREATE: AvailableIntentsEventsEnum.GROUP_AND_C2C_EVENT, // 用户在群里@机器人时收到的消息
   GROUP_ADD_ROBOT: AvailableIntentsEventsEnum.GROUP_AND_C2C_EVENT, // 机器人被添加到群聊
   GROUP_DEL_ROBOT: AvailableIntentsEventsEnum.GROUP_AND_C2C_EVENT, // 机器人被移出群聊
