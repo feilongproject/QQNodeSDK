@@ -42,5 +42,6 @@ const apiMap = {
   c2cMessagesURI: '/v2/users/:openID/messages',
   c2cMessageURI: '/v2/users/:openID/messages/:messageID',
   c2cFilesURI: '/v2/users/:openID/files',
+  c2cStreamingMessagesURI: '/v2/users/:openID/stream_messages',
 };
 export const getURL = (endpoint: keyof typeof apiMap) => apiMap[endpoint];

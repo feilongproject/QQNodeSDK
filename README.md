@@ -14,6 +14,10 @@ npm i qq-bot-sdk --registry=https://registry.npmjs.org
 
 详情请见 `example` 中[`webhook`](/example/webhook) 使用案例
 
+## `streaming` 方式发送消息
+
+详情请见 `example` 中[`streaming`](/example/streaming) 使用案例，部分源码参照 `@openclaw/qqbot`
+
 ## `websocket` 方式引用
 
 > 可参见[example](/example)中样例

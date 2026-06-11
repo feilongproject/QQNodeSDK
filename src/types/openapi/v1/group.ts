@@ -7,8 +7,8 @@ import { Ark, MessageKeyboard, MessageMarkdown } from './message';
 export interface GroupAPI {
     // message: (channelID: string, messageID: string) => Promise<RestyResponse<IMessageRes>>;
     // messages: (channelID: string, pager: MessagesPager) => Promise<RestyResponse<IMessage[]>>;
-    postMessage: (openID: string, message: GMessageToCreate) => Promise<RestyResponse<GMessageRec>>;
-    postFile: (openID: string, message: GFileToCreate) => Promise<RestyResponse<GFileRec>>;
+    postMessage: (openID: string, message: GMessageToCreate) => Promise<RestyResponse<GCMessageResponse>>;
+    postFile: (openID: string, message: FileToCreate) => Promise<RestyResponse<MediaUploadResponse>>;
     deleteMessage: (openID: string, messageID: string) => Promise<RestyResponse<any>>;
 }
 
@@ -28,22 +28,27 @@ export interface GMedia {
     file_info: string;
 }
 
-export interface GFileToCreate {
+export interface FileToCreate {
     file_type: number; // 参数: 1.图片 2.视频 3.语音 4.文件（暂不开放）// 文件格式: 图片png/jpg 视频mp4 语音silk
     file_data?: string; // base64 编码后的文件
     url?: string;
     srv_send_msg: boolean; // 当为 true 消息会直接发送到目标端，占用 主动消息频次，超频会发送失败。为 false 时消息不会直接发送到目标端，返回的 file_info 字段数据，可使用在消息发送接口 media 字段中
 }
 
-export interface GMessageRec {
-    group_code: string;
-    msg?: string;
-    msg_seq?: string;
-    ret?: number;
-}
-
-export interface GFileRec {
+export interface MediaUploadResponse {
     file_uuid: string;
     file_info: string;
     ttl: string;
+}
+
+/**
+ * group/c2c通用消息发送接口
+ */
+export interface GCMessageResponse {
+    id: string;
+    timestamp: number | string;
+    /** 消息的引用索引信息（出站时由 QQ 服务端返回） */
+    ext_info?: {
+        ref_idx?: string;
+    };
 }
