@@ -52,3 +52,13 @@ export interface GCMessageResponse {
         ref_idx?: string;
     };
 }
+
+export interface CUser {
+    id: string;
+    username: string;
+    bot: boolean;
+    member_openid: string;
+    scope: string; //'single';
+    is_you: boolean;
+    member_role: string; //'member';
+}
