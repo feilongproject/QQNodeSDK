@@ -33,7 +33,7 @@ export default class Session {
                 const tokenResp = await resty.create().post<{
                     access_token: string;
                     expires_in: string;
-                }>('https://bots.qq.com/app/getAppAccessToken', {
+                }>('https://api.bot.qq.com/app/getAppAccessToken', {
                     data: {
                         appId: this.config.appID,
                         clientSecret: this.config.secret,

@@ -100,7 +100,7 @@ export class OpenAPI implements IOpenAPI {
         const tokenResp = await resty.create().post<{
           access_token: string;
           expires_in: string;
-        }>('https://bots.qq.com/app/getAppAccessToken', {
+        }>('https://api.bot.qq.com/app/getAppAccessToken', {
           data: {
             appId: appID,
             clientSecret: secret,
