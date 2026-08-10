@@ -17,6 +17,7 @@ import { PinsMessageAPI } from './v1/pins-message';
 import { GuildPermissionsAPI } from './v1/guild-permission';
 import { GroupAPI } from "./v1/group";
 import { C2CAPI } from "./v1/c2c";
+import { JoinApprovalStrategyAPI } from "./v1/join-approval-strategy";
 import { WebhookAPI } from '@src/utils/webhook';
 
 export type OpenAPIRequest = <T extends Record<any, any> = any>(options: RequestOptions) => Promise<RestyResponse<T>>;
@@ -57,6 +58,7 @@ export interface IOpenAPI {
     pinsMessageApi: PinsMessageAPI;
     groupApi: GroupAPI;
     c2cApi: C2CAPI;
+    joinApprovalStrategyApi: JoinApprovalStrategyAPI;
     webhookApi: WebhookAPI;
 }
 
@@ -91,3 +93,4 @@ export * from './v1/pins-message';
 export * from './v1/guild-permission';
 export * from './v1/group';
 export * from './v1/c2c';
+export * from './v1/join-approval-strategy';

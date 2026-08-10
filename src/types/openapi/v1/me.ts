@@ -7,6 +7,7 @@ import { IGuild } from './guild';
 export interface MeAPI {
   me: () => Promise<RestyResponse<IUser>>;
   meGuilds: (options?: MeGuildsReq) => Promise<RestyResponse<IGuild[]>>;
+  generateUrlLink: (callback_data?: string) => Promise<RestyResponse<{ url_link: string }>>;
 }
 export interface IUser {
   id: string;

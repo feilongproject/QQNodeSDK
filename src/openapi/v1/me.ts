@@ -28,4 +28,19 @@ export default class Me implements MeAPI {
     };
     return this.request<IGuild[]>(reqOptions);
   }
+
+  /**
+   * 生成分享链接
+   * @link https://bot.q.qq.com/wiki/develop/api-v2/autogen/api/v2_generate_url_link.post.html
+   */
+  public generateUrlLink(callback_data?: string): Promise<RestyResponse<{ url_link: string }>> {
+    const options = {
+      method: 'POST' as const,
+      url: getURL('generateUrlLinkURI'),
+      data: {
+        callback_data,
+      }
+    }
+    return this.request<{ url_link: string }>(options);
+  }
 }
