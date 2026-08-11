@@ -85,6 +85,7 @@ export enum AvailableIntentsEventsEnum {
   MESSAGE_AUDIT = 'MESSAGE_AUDIT',
   INTERACTION = 'INTERACTION',
   GROUP_AND_C2C_EVENT = 'GROUP_AND_C2C_EVENT',
+  GROUP_MEMBER_EVENT = 'GROUP_MEMBER_EVENT',
 }
 
 // OpenAPI传过来的事件类型
@@ -153,10 +154,12 @@ export const WsEventType: { [key: string]: AvailableIntentsEventsEnum } = {
   GROUP_DEL_ROBOT: AvailableIntentsEventsEnum.GROUP_AND_C2C_EVENT, // 机器人被移出群聊
   GROUP_MSG_REJECT: AvailableIntentsEventsEnum.GROUP_AND_C2C_EVENT, // 群管理员主动在机器人资料页操作关闭通知
   GROUP_MSG_RECEIVE: AvailableIntentsEventsEnum.GROUP_AND_C2C_EVENT, // 群管理员主动在机器人资料页操作开启通知
-  GROUP_MEMBER_ADD: AvailableIntentsEventsEnum.GROUP_AND_C2C_EVENT, // 有新成员加入群聊
-  GROUP_MEMBER_REMOVE: AvailableIntentsEventsEnum.GROUP_AND_C2C_EVENT, // 群成员退出或被移出群聊
-  GROUP_JOIN_REQUEST: AvailableIntentsEventsEnum.GROUP_AND_C2C_EVENT, // 用户申请加群事件
   SUBSCRIBE_MESSAGE_STATUS: AvailableIntentsEventsEnum.GROUP_AND_C2C_EVENT, // 订阅消息授权状态变更
+
+  //  ======= GROUP_MEMBER_EVENT ======
+  GROUP_MEMBER_ADD: AvailableIntentsEventsEnum.GROUP_MEMBER_EVENT, // 群成员加入
+  GROUP_MEMBER_REMOVE: AvailableIntentsEventsEnum.GROUP_MEMBER_EVENT, // 群成员退出
+  GROUP_JOIN_REQUEST: AvailableIntentsEventsEnum.GROUP_MEMBER_EVENT, // 用户申请加群事件
 };
 
 export const WSCodes = {
@@ -252,6 +255,7 @@ export const IntentEvents: IntentEventsMapType = {
   GUILD_MESSAGES: 1 << 9,
   GUILD_MESSAGE_REACTIONS: 1 << 10,
   DIRECT_MESSAGE: 1 << 12,
+  GROUP_MEMBER_EVENT: 1 << 24,
   GROUP_AND_C2C_EVENT: 1 << 25,
   INTERACTION: 1 << 26,
   MESSAGE_AUDIT: 1 << 27,
