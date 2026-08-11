@@ -66,12 +66,23 @@ export default [
   {
     input: 'src/index.ts',
     output: [{ file: 'typings/index.d.ts', format: 'es' }],
+    // Keep ws external; resty-client is path-mapped below and inlined into typings.
+    external: ['ws'],
     plugins: [
       json(),
       typescriptPaths({
         preserveExtensions: true,
       }),
-      dts(),
+      dts({
+        compilerOptions: {
+          baseUrl: '.',
+          paths: {
+            '@src/*': ['src/*'],
+            // Inline public HTTP types so consumers need not resolve resty-client declarations
+            'resty-client': ['src/types/resty.ts'],
+          },
+        },
+      }),
     ],
   },
 ];
