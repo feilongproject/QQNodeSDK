@@ -84,7 +84,7 @@ export enum AvailableIntentsEventsEnum {
   PUBLIC_GUILD_MESSAGES = 'PUBLIC_GUILD_MESSAGES',
   MESSAGE_AUDIT = 'MESSAGE_AUDIT',
   INTERACTION = 'INTERACTION',
-  GROUP_AND_C2C_EVENT = "GROUP_AND_C2C_EVENT",
+  GROUP_AND_C2C_EVENT = 'GROUP_AND_C2C_EVENT',
 }
 
 // OpenAPI传过来的事件类型
@@ -153,6 +153,10 @@ export const WsEventType: { [key: string]: AvailableIntentsEventsEnum } = {
   GROUP_DEL_ROBOT: AvailableIntentsEventsEnum.GROUP_AND_C2C_EVENT, // 机器人被移出群聊
   GROUP_MSG_REJECT: AvailableIntentsEventsEnum.GROUP_AND_C2C_EVENT, // 群管理员主动在机器人资料页操作关闭通知
   GROUP_MSG_RECEIVE: AvailableIntentsEventsEnum.GROUP_AND_C2C_EVENT, // 群管理员主动在机器人资料页操作开启通知
+  GROUP_MEMBER_ADD: AvailableIntentsEventsEnum.GROUP_AND_C2C_EVENT, // 有新成员加入群聊
+  GROUP_MEMBER_REMOVE: AvailableIntentsEventsEnum.GROUP_AND_C2C_EVENT, // 群成员退出或被移出群聊
+  GROUP_JOIN_REQUEST: AvailableIntentsEventsEnum.GROUP_AND_C2C_EVENT, // 用户申请加群事件
+  SUBSCRIBE_MESSAGE_STATUS: AvailableIntentsEventsEnum.GROUP_AND_C2C_EVENT, // 订阅消息授权状态变更
 };
 
 export const WSCodes = {

@@ -6,9 +6,19 @@ import { FileToCreate, GCMessageResponse, GMessageToCreate, MediaUploadResponse 
  */
 export interface C2CAPI {
     postStreamingMessage: (openID: string, message: StreamMessageRequest) => Promise<RestyResponse<GCMessageResponse>>;
-    postMessage: (openID: string, message: GMessageToCreate) => Promise<RestyResponse<GCMessageResponse>>;
+    postMessage: (openID: string, message: CMessageToCreate) => Promise<RestyResponse<GCMessageResponse>>;
     postFile: (openID: string, message: FileToCreate) => Promise<RestyResponse<MediaUploadResponse>>;
     deleteMessage: (openID: string, messageID: string) => Promise<RestyResponse<any>>;
+}
+
+export interface CMessageToCreate extends GMessageToCreate {
+    is_wakeup?: boolean; // 指明发送消息为互动召回消息，与 msg_id，event_id 互斥使用
+    input_notify?: IInputNotify; // 输入中状态，msg_type=6时使用
+}
+
+export interface IInputNotify {
+    input_type?: number; // 填 1
+    input_second?: number; // 状态持续时间，最长60s
 }
 
 // ---- 流式消息常量 ----
@@ -59,5 +69,3 @@ export interface StreamMessageRequest {
     /** 同一条流式会话内的发送索引，从 0 开始，每次发送前递增；新流式会话重新从 0 开始 */
     index: number;
 }
-
-

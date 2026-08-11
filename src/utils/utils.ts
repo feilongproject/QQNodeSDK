@@ -39,5 +39,5 @@ export const addAuthorization = (header: RawAxiosRequestHeaders | AxiosHeaders, 
 };
 // 组装完整Url
 export const buildUrl = (path = '', isSandbox?: boolean) => {
-  return `${isSandbox ? 'https://sandbox.api.sgroup.qq.com' : 'https://api.sgroup.qq.com'}${path}`;
+  return `${isSandbox ? 'https://sandbox.api.sgroup.qq.com' : 'https://api.bot.qq.com'}${path}`;
 };

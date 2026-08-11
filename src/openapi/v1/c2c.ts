@@ -1,4 +1,4 @@
-import { Config, OpenAPIRequest, C2CAPI, GMessageToCreate, StreamMessageRequest, GCMessageResponse, FileToCreate, MediaUploadResponse } from '@src/types';
+import { Config, OpenAPIRequest, C2CAPI, CMessageToCreate, StreamMessageRequest, GCMessageResponse, FileToCreate, MediaUploadResponse } from '@src/types';
 import { RestyResponse } from 'resty-client';
 import { getURL } from './resource';
 
@@ -11,7 +11,7 @@ export default class C2C implements C2CAPI {
     }
 
     // 发送消息
-    public postMessage(openID: string, message: GMessageToCreate): Promise<RestyResponse<GCMessageResponse>> {
+    public postMessage(openID: string, message: CMessageToCreate): Promise<RestyResponse<GCMessageResponse>> {
         const options = {
             method: 'POST' as const,
             url: getURL('c2cMessagesURI'),
@@ -23,7 +23,7 @@ export default class C2C implements C2CAPI {
         return this.request<GCMessageResponse>(options);
     }
 
-    // 发送消息
+    // 流式发送单聊消息
     public postStreamingMessage(openID: string, message: StreamMessageRequest): Promise<RestyResponse<GCMessageResponse>> {
         const options = {
             method: 'POST' as const,

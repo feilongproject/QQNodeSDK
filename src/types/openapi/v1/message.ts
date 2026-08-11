@@ -107,9 +107,11 @@ export interface MessageToCreate {
 }
 
 export interface MessageMarkdown {
+  template_id?: number; // 【已废弃】平台 Markdown 模板 ID。使用模板时填写，非模板不传（旧用于订阅消息）
   custom_template_id?: string;
   content?: string;
   params?: MessageMarkdownParam[];
+  force_verify_image_resource?: boolean; // 是否校验图片转存结果，当为true时，如果出现图片转存失败，则会返回错误，消息不会发送。默认为false
 }
 
 export interface MessageMarkdownParam {
@@ -142,18 +144,24 @@ export interface Button {
 
 // RenderData  按纽渲染展示
 export interface RenderData {
-  label?: string; // 按纽上的文字
-  visited_label?: string; // 点击后按纽上文字
-  style?: number; // 按钮样式，0：灰色线框，1：蓝色线框
+  label?: string; // 按钮文字，最多 10 字符
+  visited_label?: string; // 点击后文字，不传则保持不变
+  style?: number; // 按钮样式，0=灰线框, 1=蓝线框, 2=白字, 3=蓝底白字
 }
 
 // Action 按纽点击操作
 export interface Action {
-  type?: number; // 操作类型
+  type?: number; // 操作类型；0=跳转按钮（http 或 小程序）, 1=回调按钮（回调后台接口, data 传给后台）, 2=指令按钮（自动在输入框插入 @bot data）, 3=客户端native跳转链接（mqqapi，有白名单）, 4=订阅按钮
   permission?: Permission; // 可操作
   click_limit?: number; // 可点击的次数, 默认不限
-  data?: string; // 操作相关数据
+  data?: string; // 操作相关数据，type=1/2 时必填
   at_bot_show_channel_list?: boolean; // false:当前 true:弹出展示子频道选择器
+  unsupport_tips?: string; // 版本过低时提示文案
+  enter?: boolean; // 指令按钮可用，点击按钮后直接自动发送 data，仅单聊可用，默认 false。支持版本 8983
+  reply?: boolean; // 指令按钮可用，指令是否带引用回复本消息，默认 false。支持版本 8983
+  anchor?: number; // 本字段仅在指令按钮下有效，设置后后会忽略 action.enter 配置。 设置为 1 时 ，点击按钮自动唤起启手Q选图器，其他值暂无效果。 （仅支持手机端版本 8983+ 的单聊场景，桌面端不支持）
+  subscribe_data?: ISubscribeData; // 订阅按钮数据
+  modal?: IModal; // 用户点击二次确认操作
 }
 
 // Permission 按纽操作权限
@@ -161,4 +169,21 @@ export interface Permission {
   type?: number; // PermissionType 按钮的权限类型
   specify_role_ids?: string[]; // SpecifyRoleIDs 身份组
   specify_user_ids?: string[]; // SpecifyUserIDs 指定 UserID
+}
+
+// 订阅按钮数据
+export interface ISubscribeData {
+  template_ids: ITemplateId[]; // 具体要订阅的模板列表，最多 3 项
+}
+
+export interface ITemplateId {
+  template_id?: number; // 平台 Markdown 模板 ID（由运营设置，有bot白名单），与 custom_template_id 互斥
+  custom_template_id?: string; // 自定义 Markdown 模板 ID，与 template_id 互斥
+}
+
+// Modal 二次确认数据
+export interface IModal {
+  content?: string; // 二次确认的提示文本,如果不为空则会进行二次确认. 注意:最多40个字符, 不能有URL
+  confirm_text?: string; // 二次确认提示确认按钮中展示的文字,可以为空,  默认为"确认" 注意:最多4个字符
+  cancel_text?: string; // 二次确认提示取消按钮中的文字,可以为空,默认为"取消" 注意:最多4个字符
 }
