@@ -1,5 +1,5 @@
 import { RestyResponse } from 'resty-client';
-import { Ark, MessageKeyboard, MessageMarkdown } from './message';
+import { Ark, MessageKeyboard, MessageMarkdown, MessageReference } from './message';
 
 /**
  * =============  Group 消息接口  =============
@@ -29,6 +29,7 @@ export interface GMessageToCreate {
     markdown?: MessageMarkdown;
     event_id?: string;
     subscribe_id?: string; // 订阅 id
+    message_reference?: MessageReference;
 }
 
 export interface GMedia {
