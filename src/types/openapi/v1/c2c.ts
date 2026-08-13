@@ -8,7 +8,7 @@ import type { MessageKeyboard } from './message';
 export interface C2CAPI {
     postStreamingMessage: (openID: string, message: StreamMessageRequest) => Promise<RestyResponse<GCMessageResponse>>;
     postMessage: (openID: string, message: CMessageToCreate) => Promise<RestyResponse<GCMessageResponse>>;
-    postFile: (openID: string, message: FileToCreate) => Promise<RestyResponse<MediaUploadResponse>>;
+    postFile: (openID: string, message: FileToCreate, useChunkedUpload?: boolean) => Promise<RestyResponse<MediaUploadResponse>>;
     deleteMessage: (openID: string, messageID: string) => Promise<RestyResponse<any>>;
 }
 
