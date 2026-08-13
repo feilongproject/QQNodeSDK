@@ -140,7 +140,7 @@ export interface IReviewQA {
  */
 export interface ApprovalJoinRequestPayload {
     op: 'approve' | 'decline'; // 审批动作: approve=通过, decline=拒绝
-    join_request_id?: string; // 申请ID
+    join_request_id: string; // 申请ID
     reject_reason?: string; // 拒绝理由，op=decline 时可填
     add_to_member_blacklist?: boolean; // 是否同时加入群黑名单，默认 false，op=decline 时可填
 }
