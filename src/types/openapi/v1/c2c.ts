@@ -1,5 +1,6 @@
-import { RestyResponse } from 'resty-client';
-import { FileToCreate, GCMessageResponse, GMessageToCreate, MediaUploadResponse } from './group';
+import type { RestyResponse } from 'resty-client';
+import type { FileToCreate, GCMessageResponse, GMessageToCreate, MediaUploadResponse } from './group';
+import type { MessageKeyboard } from './message';
 
 /**
  * =============  C2C 消息接口  =============
@@ -14,6 +15,9 @@ export interface C2CAPI {
 export interface CMessageToCreate extends GMessageToCreate {
     is_wakeup?: boolean; // 指明发送消息为互动召回消息，与 msg_id，event_id 互斥使用
     input_notify?: IInputNotify; // 输入中状态，msg_type=6时使用
+    prompt_keyboard?: {
+        keyboard: MessageKeyboard; // 附在消息下面的小按钮，最多 3 个
+    };
 }
 
 export interface IInputNotify {
