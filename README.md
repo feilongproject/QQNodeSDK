@@ -73,14 +73,16 @@ ws.on(AvailableIntentsEventsEnum.GROUP_AND_C2C_EVENT, async (data) => {
 
 ### 发送富媒体文件（主动）
 
+> 支持分片上传，默认不启用
+
 ```js
 await client.groupApi
     .postFile(data.msg.group_id, {
-        file_type: 1, // 参数: 1.图片 2.视频 3.语音 4.文件（暂不开放）// 文件格式: 图片png/jpg 视频mp4 语音silk
+        file_type: 1, // 参数: 1.图片 2.视频 3.语音 4.文件 // 文件格式: 图片png/jpg 视频mp4 语音silk
         url: "文件url", // 填入要发送的文件 url （不可与 file_data 一同使用）
         file_data: "", // 文件base64后的字符串 （不可与 url 一同使用）
         srv_send_msg: true, // 为 true 时，消息会直接发送到目标端，占用主动消息频次，超频会发送失败。
-    })
+    }, true) // 为 true 时启用分片上传
     .then((res) => {
         console.log(res.data);
     }); // 主动发送文件

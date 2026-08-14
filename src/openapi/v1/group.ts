@@ -16,13 +16,16 @@ import {
 } from '@src/types';
 import { RestyResponse } from 'resty-client';
 import { getURL } from './resource';
+import { ChunkedUpload } from '@src/utils/chunked-upload';
 
 export default class Group implements GroupAPI {
     public request: OpenAPIRequest;
     public config: Config;
+    private chunkedUpload: ChunkedUpload;
     constructor(request: OpenAPIRequest, config: Config) {
         this.request = request;
         this.config = config;
+        this.chunkedUpload = new ChunkedUpload(request, config);
     }
 
     // 发送消息
@@ -38,8 +41,19 @@ export default class Group implements GroupAPI {
         return this.request<GCMessageResponse>(options);
     }
 
-    // 发送文件
-    public postFile(openID: string, message: FileToCreate): Promise<RestyResponse<MediaUploadResponse>> {
+    // 发送文件；useChunkedUpload = true 时启用分片上传
+    public postFile(openID: string, message: FileToCreate, useChunkedUpload = false): Promise<RestyResponse<MediaUploadResponse>> {
+        if (useChunkedUpload) {
+            return this.chunkedUpload.uploadFile(
+                openID,
+                {
+                    prepareURL: getURL('groupUploadPrepareURI'),
+                    partFinishURL: getURL('groupUploadPartFinishURI'),
+                    mergeURL: getURL('groupFilesURI'),
+                },
+                message,
+            );
+        }
         const options = {
             method: 'POST' as const,
             url: getURL('groupFilesURI'),

@@ -1,5 +1,5 @@
-import { RestyResponse } from 'resty-client';
-import { Ark, MessageKeyboard, MessageMarkdown, MessageReference } from './message';
+import type { RestyResponse } from 'resty-client';
+import type { Ark, MessageKeyboard, MessageMarkdown, MessageReference } from './message';
 
 /**
  * =============  Group 消息接口  =============
@@ -8,7 +8,7 @@ export interface GroupAPI {
     // message: (channelID: string, messageID: string) => Promise<RestyResponse<IMessageRes>>;
     // messages: (channelID: string, pager: MessagesPager) => Promise<RestyResponse<IMessage[]>>;
     postMessage: (openID: string, message: GMessageToCreate) => Promise<RestyResponse<GCMessageResponse>>;
-    postFile: (openID: string, message: FileToCreate) => Promise<RestyResponse<MediaUploadResponse>>;
+    postFile: (openID: string, message: FileToCreate, useChunkedUpload?: boolean) => Promise<RestyResponse<MediaUploadResponse>>;
     deleteMessage: (openID: string, messageID: string) => Promise<RestyResponse<any>>;
     info: (openID: string) => Promise<RestyResponse<IGroupInfo>>;
     botState: (openID: string) => Promise<RestyResponse<IBotState>>;
@@ -37,16 +37,19 @@ export interface GMedia {
 }
 
 export interface FileToCreate {
-    file_type: number; // 参数: 1.图片 2.视频 3.语音 4.文件（暂不开放）// 文件格式: 图片png/jpg 视频mp4 语音silk
-    file_data?: string; // base64 编码后的文件
-    url?: string;
-    srv_send_msg: boolean; // 当为 true 消息会直接发送到目标端，占用 主动消息频次，超频会发送失败。为 false 时消息不会直接发送到目标端，返回的 file_info 字段数据，可使用在消息发送接口 media 字段中
+    file_type: number; // 参数: 1.图片 2.视频 3.语音 4.文件 // 文件格式: 图片png/jpg 视频mp4 语音silk
+    file_data?: string; // base64 编码后的文件；分片上传时 SDK 会基于它计算校验值并分片
+    url?: string; // 媒体资源的 URL，需以 http 开头，平台会下载并转存；分片上传时 SDK 会先下载再分片
+    file_name?: string; // 文件名
+    srv_send_msg?: boolean; // 当为 true 消息会直接发送到目标端，占用 主动消息频次，超频会发送失败。为 false 时消息不会直接发送到目标端，返回的 file_info 字段数据，可使用在消息发送接口 media 字段中
 }
 
 export interface MediaUploadResponse {
     file_uuid: string;
     file_info: string;
-    ttl: string;
+    ttl: number;
+    id?: string; // 发送消息的唯一 ID。仅 srv_send_msg=true 时返回
+    raw_url?: string; // 文件下载链接（COS 预签名 GET URL），有效期与 ttl 一致 仅分片上传合并（upload_id 路径）且 file_type 为图片/视频/语音时返回； URL 直传和文件类型(file_type=4)不返回此字段
 }
 
 /**

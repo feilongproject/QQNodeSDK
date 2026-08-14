@@ -8,7 +8,7 @@ import json from '@rollup/plugin-json';
 
 const ENV = process.env.NODE_ENV;
 const extensions = ['.ts', '.js'];
-const external = ['ws', 'resty-client'];
+const external = ['ws', 'resty-client', 'axios'];
 
 export default [
   {
