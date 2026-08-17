@@ -128,6 +128,11 @@ export interface MessageKeyboard {
 // CustomKeyboard 自定义 Keyboard
 export interface CustomKeyboard {
   rows?: Row[];
+  style?: KeyboardStyle;
+}
+
+export interface KeyboardStyle {
+  font_size?: string; // 可填 small, 表现为小按钮
 }
 
 // Row 每行结构
