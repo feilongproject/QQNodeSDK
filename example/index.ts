@@ -2,8 +2,8 @@
  * 以下仅为用法示意，详情请参照文档：https://bot.q.qq.com/wiki/develop/nodesdk/
  * 其中对官方逻辑扩展，添加了诸多功能，修复了许多问题
  */
-const { createOpenAPI, createWebsocket, AvailableIntentsEventsEnum } = require('qq-bot-sdk');
-const log4js = require("log4js"); // 仅在需要 logger 时使用
+import { createOpenAPI, createWebsocket, AvailableIntentsEventsEnum } from 'qq-bot-sdk';
+import log4js from 'log4js'; // 仅在需要 logger 时使用
 
 const testConfigWs = {
     appID: '',
@@ -28,7 +28,8 @@ ws.on('READY', (wsdata) => {
 });
 
 ws.on('ERROR', (data) => {
-    console.log('[ERROR] 事件接收 :', data);
+    console.log('[ERROR] 事件接收 :', data.msg);
+    process.exit(1);
 });
 ws.on(AvailableIntentsEventsEnum.GUILDS, (data) => {
     console.log('[GUILDS] 事件接收 :', data);
@@ -105,6 +106,4 @@ ws.on(AvailableIntentsEventsEnum.GROUP_AND_C2C_EVENT, async (data) => {
     //     media: { file_info: fileRes.data.file_info },
     //     msg_id: data.msg.id,
     // }).then(res => console.log(res.data)); // 通过文件信息发送文件
-
 });
-
