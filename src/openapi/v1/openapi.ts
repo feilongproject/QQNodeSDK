@@ -18,9 +18,10 @@ import Schedule from './schedule';
 import GuildPermissions from './guild-permissions';
 import Interaction from './interaction';
 import Group from './group';
+import GroupMember from './group-member';
 import C2C from './c2c';
 import JoinApprovalStrategy from './join-approval-strategy';
-import { GuildAPI, ChannelAPI, MeAPI, MessageAPI, Config, IOpenAPI, MemberAPI, RoleAPI, DirectMessageAPI, ChannelPermissionsAPI, AudioAPI, MuteAPI, ScheduleAPI, AnnounceAPI, GuildPermissionsAPI, ReactionAPI, PinsMessageAPI, InteractionAPI, GroupAPI, C2CAPI, JoinApprovalStrategyAPI } from '@src/types';
+import { GuildAPI, ChannelAPI, MeAPI, MessageAPI, Config, IOpenAPI, MemberAPI, RoleAPI, DirectMessageAPI, ChannelPermissionsAPI, AudioAPI, MuteAPI, ScheduleAPI, AnnounceAPI, GuildPermissionsAPI, ReactionAPI, PinsMessageAPI, InteractionAPI, GroupAPI, GroupMemberAPI, C2CAPI, JoinApprovalStrategyAPI } from '@src/types';
 import { WebhookAPI } from '@src/utils/webhook';
 import { addUserAgent, buildUrl } from '@src/utils/utils';
 export const apiVersion = 'v1';
@@ -47,6 +48,7 @@ export class OpenAPI implements IOpenAPI {
   public pinsMessageApi!: PinsMessageAPI;
   public guildPermissionsApi!: GuildPermissionsAPI;
   public groupApi!: GroupAPI;
+  public groupMemberApi!: GroupMemberAPI;
   public c2cApi!: C2CAPI;
   public joinApprovalStrategyApi!: JoinApprovalStrategyAPI;
   public webhookApi!: WebhookAPI;
@@ -79,6 +81,7 @@ export class OpenAPI implements IOpenAPI {
     client.interactionApi = new Interaction(this.request, this.config);
     client.pinsMessageApi = new PinsMessage(this.request, this.config);
     client.groupApi = new Group(this.request, this.config);
+    client.groupMemberApi = new GroupMember(this.request, this.config);
     client.c2cApi = new C2C(this.request, this.config);
     client.joinApprovalStrategyApi = new JoinApprovalStrategy(this.request, this.config);
     client.webhookApi = new WebhookAPI(this.request, this.config);
