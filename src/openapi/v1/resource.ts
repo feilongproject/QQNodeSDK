@@ -12,6 +12,7 @@ const apiMap = {
   messageURI: '/channels/:channelID/messages/:messageID',
   userMeURI: '/users/@me',
   userMeGuildsURI: '/users/@me/guilds',
+  userInfoURI: '/v2/users/:openID/info',
   muteURI: '/guilds/:guildID/mute',
   muteMemberURI: '/guilds/:guildID/members/:userID/mute',
   muteMembersURI: '/guilds/:guildID/mute',

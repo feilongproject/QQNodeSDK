@@ -91,6 +91,7 @@ export interface WsInteractionCreate {
     channel_id?: string;
     user_openid?: string;
     group_openid?: string;
+    union_group_openid?: string;
     group_member_openid?: string;
     data: {
         type: number;
@@ -180,6 +181,8 @@ export interface WsAudioAction {
 export interface WsUser {
     id: string;
     username: string;
+    member_nickname?: string; // 仅群场景，用户在群内的昵称
+    avatar: string;
     bot: boolean;
     union_openid?: string;
     union_user_account?: string;
@@ -237,6 +240,7 @@ export interface WsC2CMessage {
 /** GROUP_MESSAGE_CREATE / GROUP_AT_MESSAGE_CREATE */
 export interface WsGroupMessage extends WsC2CMessage {
     group_openid: string;
+    union_group_openid?: string;
     mentions?: WsUser[];
 }
 
@@ -254,6 +258,7 @@ export interface WsFriendEvent {
 export interface WsGroupEvent {
     timestamp: number;
     group_openid: string;
+    union_group_openid?: string;
     op_member_openid: string;
 }
 
@@ -275,6 +280,7 @@ export interface WsSubscribeMsgTemplateResult {
 
 export interface WsSubscribeMessageStatus {
     group_openid?: string;
+    union_group_openid?: string;
     openid?: string;
     result: WsSubscribeMsgTemplateResult[];
 }
@@ -283,13 +289,15 @@ export interface WsSubscribeMessageStatus {
 export interface WsGroupMemberEvent {
     timestamp: number;
     group_openid: string;
+    union_group_openid?: string;
     member_openid: string;
     user_openid?: string;
 }
 
-/** GROUP_JOIN_REQUEST（当前 SDK 分发到 GROUP_MEMBER_EVENT） */
+/** GROUP_JOIN_REQUEST（SDK 分发到 GROUP_MEMBER_EVENT） */
 export interface WsGroupJoinRequestEvent {
     group_openid: string;
+    union_group_openid?: string;
     join_request_id: string;
     risk_tips?: string;
     union_openid?: string;

@@ -7,6 +7,7 @@ import { IGuild } from './guild';
 export interface MeAPI {
   me: () => Promise<RestyResponse<IUser>>;
   meGuilds: (options?: MeGuildsReq) => Promise<RestyResponse<IGuild[]>>;
+  userInfo: (openID: string) => Promise<RestyResponse<IUserInfo>>;
   generateUrlLink: (callback_data?: string) => Promise<RestyResponse<{ url_link: string }>>;
   // 全局自定义菜单
   getMenu: () => Promise<RestyResponse<IMenuResponse>>;
@@ -32,6 +33,17 @@ export interface MeGuildsReq {
   before?: string; // 读此id之前的数据
   after?: string; // 读此id之后的数据
   limit?: number; // 每次拉取多少条数据 最大不超过 100
+}
+
+/**
+ * 获取用户基本信息
+ * @link https://bot.q.qq.com/wiki/develop/api-v2/autogen/api/v2_users_user_openid_info.get.html
+ */
+export interface IUserInfo {
+  union_openid?: string; // 跨应用关联用户 openid，当绑定了 3 方应用时有效
+  username: string; // 用户名
+  avatar: string; // 用户头像原图
+  allow_proactive_msg: boolean; // 是否接收主动推送。true: 接受主动推送
 }
 
 /**

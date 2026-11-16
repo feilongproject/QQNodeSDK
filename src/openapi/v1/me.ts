@@ -2,6 +2,7 @@ import {
   Config,
   OpenAPIRequest,
   IUser,
+  IUserInfo,
   MeAPI,
   IGuild,
   MeGuildsReq,
@@ -45,6 +46,21 @@ export default class Me implements MeAPI {
       params: options,
     };
     return this.request<IGuild[]>(reqOptions);
+  }
+
+  /**
+   * 获取用户基本信息
+   * @link https://bot.q.qq.com/wiki/develop/api-v2/autogen/api/v2_users_user_openid_info.get.html
+   */
+  public userInfo(openID: string): Promise<RestyResponse<IUserInfo>> {
+    const options = {
+      method: 'GET' as const,
+      url: getURL('userInfoURI'),
+      rest: {
+        openID,
+      },
+    };
+    return this.request<IUserInfo>(options);
   }
 
   /**
