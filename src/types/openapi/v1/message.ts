@@ -106,6 +106,17 @@ export interface MessageToCreate {
   markdown?: MessageMarkdown;
 }
 
+// 群/c2c 卡片消息
+export interface MessageCard {
+  type?: string; // 卡片类型（tuwen：图文卡片）
+  content?: { // type='tuwen' 时
+    title?: string; // 1-50 字符
+    description?: string; // 1-200 字符
+    url?: string; // 必须为https,链接长度≤ 1024 字符
+    pic_url?: string; // 必须为https,链接长度≤ 1024 字符
+  }
+}
+
 export interface MessageMarkdown {
   template_id?: number; // 【已废弃】平台 Markdown 模板 ID。使用模板时填写，非模板不传（旧用于订阅消息）
   custom_template_id?: string;

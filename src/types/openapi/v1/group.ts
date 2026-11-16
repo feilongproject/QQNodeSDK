@@ -1,5 +1,5 @@
 import type { RestyResponse } from 'resty-client';
-import type { Ark, MessageKeyboard, MessageMarkdown, MessageReference } from './message';
+import type { Ark, MessageKeyboard, MessageMarkdown, MessageReference, MessageCard } from './message';
 
 /**
  * =============  Group 消息接口  =============
@@ -20,7 +20,7 @@ export interface GroupAPI {
 
 export interface GMessageToCreate {
     content?: string;
-    msg_type: number; // 0. 文本 1. 图文混排 2. markdown 3. ark 4. embed 7. media 富媒体
+    msg_type: number; // 0=纯文本(content) 2=Markdown(markdown) 6=输入中状态（input_notify, 仅单聊) 7=富媒体(media) 8=图文卡片(card)
     msg_id?: string;
     msg_seq?: number;
     media?: GMedia;
@@ -30,6 +30,7 @@ export interface GMessageToCreate {
     event_id?: string;
     subscribe_id?: string; // 订阅 id
     message_reference?: MessageReference;
+    card?: MessageCard;
 }
 
 export interface GMedia {
