@@ -21,7 +21,8 @@ import Group from './group';
 import GroupMember from './group-member';
 import C2C from './c2c';
 import JoinApprovalStrategy from './join-approval-strategy';
-import { GuildAPI, ChannelAPI, MeAPI, MessageAPI, Config, IOpenAPI, MemberAPI, RoleAPI, DirectMessageAPI, ChannelPermissionsAPI, AudioAPI, MuteAPI, ScheduleAPI, AnnounceAPI, GuildPermissionsAPI, ReactionAPI, PinsMessageAPI, InteractionAPI, GroupAPI, GroupMemberAPI, C2CAPI, JoinApprovalStrategyAPI } from '@src/types';
+import MediaImages from './media-images';
+import { GuildAPI, ChannelAPI, MeAPI, MessageAPI, Config, IOpenAPI, MemberAPI, RoleAPI, DirectMessageAPI, ChannelPermissionsAPI, AudioAPI, MuteAPI, ScheduleAPI, AnnounceAPI, GuildPermissionsAPI, ReactionAPI, PinsMessageAPI, InteractionAPI, GroupAPI, GroupMemberAPI, C2CAPI, JoinApprovalStrategyAPI, MediaImagesAPI } from '@src/types';
 import { WebhookAPI } from '@src/utils/webhook';
 import { addUserAgent, buildUrl } from '@src/utils/utils';
 export const apiVersion = 'v1';
@@ -51,6 +52,7 @@ export class OpenAPI implements IOpenAPI {
   public groupMemberApi!: GroupMemberAPI;
   public c2cApi!: C2CAPI;
   public joinApprovalStrategyApi!: JoinApprovalStrategyAPI;
+  public mediaImagesApi!: MediaImagesAPI;
   public webhookApi!: WebhookAPI;
   public accessToken: string;
   public tokenExpires: number;
@@ -84,6 +86,7 @@ export class OpenAPI implements IOpenAPI {
     client.groupMemberApi = new GroupMember(this.request, this.config);
     client.c2cApi = new C2C(this.request, this.config);
     client.joinApprovalStrategyApi = new JoinApprovalStrategy(this.request, this.config);
+    client.mediaImagesApi = new MediaImages(this.request, this.config);
     client.webhookApi = new WebhookAPI(this.request, this.config);
   }
   // 基础rest请求
