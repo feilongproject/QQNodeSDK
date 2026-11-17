@@ -12,6 +12,7 @@ const apiMap = {
   messageURI: '/channels/:channelID/messages/:messageID',
   userMeURI: '/users/@me',
   userMeGuildsURI: '/users/@me/guilds',
+  userInfoURI: '/v2/users/:openID/info',
   muteURI: '/guilds/:guildID/mute',
   muteMemberURI: '/guilds/:guildID/members/:userID/mute',
   muteMembersURI: '/guilds/:guildID/mute',
@@ -65,5 +66,9 @@ const apiMap = {
   panelsURI: '/v2/panels',
   panelURI: '/v2/panels/:panelID',
   panelTargetURI: '/v2/panels/:panelID/target',
+  mediaImagesURI: '/v2/media-images',
+  mediaImagesPrepareURI: '/v2/media-images/prepare',
+  mediaImagesCompleteURI: '/v2/media-images/complete',
+  mediaImageDeleteURI: '/v2/media-images/:imageID/delete',
 };
 export const getURL = (endpoint: keyof typeof apiMap) => apiMap[endpoint];

@@ -19,6 +19,7 @@ import { GroupAPI } from "./v1/group";
 import { GroupMemberAPI } from './v1/group-member';
 import { C2CAPI } from "./v1/c2c";
 import { JoinApprovalStrategyAPI } from "./v1/join-approval-strategy";
+import { MediaImagesAPI } from './v1/media-images';
 import { WebhookAPI } from '@src/utils/webhook';
 
 export type OpenAPIRequest = <T extends Record<any, any> = any>(options: RequestOptions) => Promise<RestyResponse<T>>;
@@ -61,6 +62,7 @@ export interface IOpenAPI {
     groupMemberApi: GroupMemberAPI;
     c2cApi: C2CAPI;
     joinApprovalStrategyApi: JoinApprovalStrategyAPI;
+    mediaImagesApi: MediaImagesAPI;
     webhookApi: WebhookAPI;
 }
 
@@ -97,3 +99,4 @@ export * from './v1/group';
 export * from './v1/group-member';
 export * from './v1/c2c';
 export * from './v1/join-approval-strategy';
+export * from './v1/media-images';
